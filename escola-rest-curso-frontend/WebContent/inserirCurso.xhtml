@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Inserir Curso</title>
+
+
+</h:head>
+<h:body>
+	<p:messages globalOnly="true" id="erroConexao" class="erro"
+		errorStyle="color: red" infoStyle="color: blue"
+		warnStyle="color: yellow" />
+	<h:form id="form" prependId="false" enctype="multipart/form-data">
+
+
+
+		<p:focus for="codigo" />
+		<h:outputText value="Incluir Novo Curso"
+			style="font-weight: bold;font-size:23pt;" />
+		<h:panelGrid styleClass="grid" columns="3">
+			<p:outputLabel for="codigo" value="Codigo: " />
+
+			<p:inputMask mask="9?9" id="codigo" maxlength="2"
+				value="#{cursoMB.curso.codigo}" readonly="false" required="true" />
+			<p:message for="codigo" errorStyle="color: red"
+				infoStyle="color: blue" warnStyle="color: yellow" />
+
+			<p:outputLabel for="nome" value="Nome: " />
+			<p:inputText id="nome" value="#{cursoMB.curso.nome}" required="true" />
+			<p:message for="nome" errorStyle="color: red" infoStyle="color: blue"
+				warnStyle="color: yellow" />
+
+
+
+
+
+		</h:panelGrid>
+		<h:panelGroup>
+
+			<p:commandButton value="Salvar" id="salvar"
+				action="#{cursoMB.acaoSalvar()}" icon="ui-icon-disk" ajax="false"
+				immediate="false">
+			</p:commandButton>
+			<p:commandButton action="#{cursoMB.acaoListar()}" ajax="false"
+				immediate="true" icon="ui-icon-close" value="Cancelar">
+
+			</p:commandButton>
+		</h:panelGroup>
+	</h:form>
+
+</h:body>
+</html>

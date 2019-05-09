@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cursos</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/CSS/style.css" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{facesContext.externalContext.requestContextPath}/imagens/favicon.ico" />
+</h:head>
+<h:body>
+<p:messages globalOnly="true"  class="erro"  errorStyle="color: red"
+				infoStyle="color: blue" warnStyle="color: yellow" />
+	<h:form id="form" prependId="false">
+
+				
+		<div id="tabela2">
+			<p:dataTable style="height:100%;" id="tabela"
+				value="#{cursoMB.lista}" var="c"
+				headerText="Lista de Ocorrencias" rows="30" paginator="true"
+				emptyMessage="Nenhuma Ocorrência Encontrada">
+
+				<f:facet name="header">
+            	Lista de Ocorrencias
+        	</f:facet>
+				<f:facet name="footer">
+            	Total de Ocorrencias: #{cursoMB.listaSize}
+        	</f:facet>
+				<p:column headerText="Editar" style="width:45px;">
+					<p:commandButton action="#{cursoMB.acaoAbrirAlteracao(c.id)}"
+						icon="ui-icon-pencil" id="alterar" ajax="false">
+
+					</p:commandButton>
+
+
+
+
+				</p:column>
+				<p:column headerText="Excluir" style="width:45px;">
+
+					<p:commandButton icon="ui-icon-close" id="excluir"
+						action="#{cursoMB.acaoExcluir(c.id)}" update="tabela">
+
+						<p:confirm header="Confirmação" message="Deseja Excluir?"
+							icon="ui-icon-alert" />
+
+					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:column>
+
+				<p:column headerText="Código" filterBy="#{c.codigo}" sortBy="#{c.id}">
+					<h:outputText value="#{c.codigo}" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{c.nome}" />
+				</p:column>
+
+			</p:dataTable>
+		</div>
+	</h:form>
+</h:body>
+</html>
